@@ -1,0 +1,10 @@
+DECLARE @IDs NVARCHAR(MAX) = '172183,169656,2710708,173241,173471,2709351,746775';
+
+WITH IngredientsIDs AS (
+SELECT CAST(value AS INT) AS ProcessedIDs
+FROM STRING_SPLIT(@IDs, ',')
+)
+
+	SELECT * FROM
+	Recipes_Ingredients RI FULL OUTER JOIN IngredientsIDs II
+	ON RI.Ingredient_ID = II.ProcessedIDs
